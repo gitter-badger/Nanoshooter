@@ -15,6 +15,6 @@ export default class Robot extends Entity {
     /**
      * Game logic run every tick.
      */
-    logic({entityState, tickInfo}: EntityLogicInput): EntityLogicOutput;
+    logic({entityState, tickReport}: EntityLogicInput): EntityLogicOutput;
     removal(): void;
 }

@@ -2,7 +2,8 @@ import Game from "./Game";
 import Stage from "./Stage";
 import Loader from "./Loader";
 import State from "./State";
-import { TickInfo } from "./Ticker";
+import { TickReport } from "./Ticker";
+export { TickReport };
 /**
  * Options for creating an Entity instance.
  */
@@ -45,17 +46,17 @@ export default class Entity {
     logic(input: EntityLogicInput): EntityLogicOutput;
     /**
      * Handle being removed from the game.
-     * Tear down any event subscriptions.
+     * Tear down any event subscriptions, etc.
      */
     removal(): void;
     /**
-     * Entity's aesthetic appearance in debugging logs.
+     * Make it look pretty in the console logs.
      */
     toString(): string;
 }
 export interface EntityLogicInput {
     entityState: EntityState;
-    tickInfo: TickInfo;
+    tickReport: TickReport;
 }
 export interface EntityLogicOutput {
     entityStateDelta: any;
@@ -69,4 +70,3 @@ export interface EntityStateOptions {
     type: string;
     label?: string;
 }
-export { TickInfo };

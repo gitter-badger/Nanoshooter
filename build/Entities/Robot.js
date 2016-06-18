@@ -72,7 +72,7 @@ define(["require", "exports", "../Engine/Entity"], function (require, exports, E
          * Game logic run every tick.
          */
         Robot.prototype.logic = function (_a) {
-            var entityState = _a.entityState, tickInfo = _a.tickInfo;
+            var entityState = _a.entityState, tickReport = _a.tickReport;
             // Wait for the mesh to be loaded.
             if (this.mesh) {
                 // When the mouse cursor is landing on something, and its not this robot mesh.
@@ -82,22 +82,18 @@ define(["require", "exports", "../Engine/Entity"], function (require, exports, E
                     this.mesh.lookAt(aimPoint, 0, 0, 0);
                 }
                 // Apply movement impulses.
-                var t = tickInfo.timeSince / 20;
+                var t = tickReport.timeSinceLastTick / 20;
                 var impulse = this.movement.multiply(new BABYLON.Vector3(t, t, t));
                 this.mesh.applyImpulse(impulse, this.mesh.position);
             }
             return { entityStateDelta: {} };
         };
         Robot.prototype.removal = function () {
-            {
-                if (this.mesh)
-                    this.mesh.dispose;
-                this.mesh = null;
-            }
-            {
-                window.removeEventListener("keydown", this.listeners.keydown);
-                window.removeEventListener("keyup", this.listeners.keyup);
-            }
+            if (this.mesh)
+                this.mesh.dispose;
+            this.mesh = null;
+            window.removeEventListener("keydown", this.listeners.keydown);
+            window.removeEventListener("keyup", this.listeners.keyup);
         };
         Robot.type = "Nanoshooter/Entities/Robot";
         return Robot;

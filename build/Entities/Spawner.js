@@ -16,8 +16,8 @@ define(["require", "exports", "../Engine/Entity"], function (require, exports, E
         Spawner.prototype.initialize = function () {
             var _this = this;
             window.addEventListener("keyup", this.keyupAction = function (event) {
-                //                  Spacebar.
-                //                     ↓
+                //                Spacebar.
+                //                    ↓
                 if (event.keyCode === 32) {
                     _this.game.addEntity(new Entity_1.EntityState({
                         type: "Nanoshooter/Entities/Cube",

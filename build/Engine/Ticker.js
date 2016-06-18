@@ -1,11 +1,12 @@
 define(["require", "exports"], function (require, exports) {
     "use strict";
     /**
-     * Stop/start controls for generic ticking loops.
+     * Generic ticking loop, with start/stop controls.
+     * Keeps a consistent timeline.
      */
     var Ticker = (function () {
         /**
-         * Create a ticker with an action function which will be called repeatedly.
+         * Instantiate a ticker with an action function which will be called repeatedly.
          */
         function Ticker(_a) {
             var tick = _a.tick, _b = _a.relax, relax = _b === void 0 ? 10 : _b;
@@ -24,7 +25,7 @@ define(["require", "exports"], function (require, exports) {
          */
         Ticker.prototype.start = function () {
             var _this = this;
-            // If stopTickingCallback is set, call it, clear it, and stop the recursive ticking process by returning.
+            // If the stop callback is set, call it, clear it, and stop the recursive ticking process by returning.
             if (this.stopTickingCallback) {
                 this.stopTickingCallback();
                 this.stopTickingCallback = null;
@@ -32,12 +33,12 @@ define(["require", "exports"], function (require, exports) {
             }
             // Gather 'start' timings.
             var now = performance.now();
-            var timeSince = now - this.lastTickTime;
-            this.timeline += timeSince;
+            var timeSinceLastTick = now - this.lastTickTime;
+            this.timeline += timeSinceLastTick;
             var tickStartTime = now;
-            // Call the TickAction.
+            // Call the tick action.
             this.tick({
-                timeSince: timeSince,
+                timeSinceLastTick: timeSinceLastTick,
                 timeline: this.timeline
             });
             // Gather 'after' timings.

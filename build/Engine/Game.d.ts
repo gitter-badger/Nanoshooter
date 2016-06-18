@@ -7,7 +7,6 @@ import State from "./State";
  * Options for creating a Game.
  */
 export interface GameOptions {
-    artRootUrl: string;
     hostElement: HTMLElement;
     log: Logger;
 }
@@ -30,7 +29,7 @@ export default class Game {
     /**
      * Create and wire up the engine components that the game is comprised of.
      */
-    constructor({artRootUrl, hostElement, log}: GameOptions);
+    constructor({hostElement, log}: GameOptions);
     /** Overridable game initialization step. */
     protected initialize(): void;
     /**

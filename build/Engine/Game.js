@@ -14,7 +14,7 @@ define(["require", "exports", "./Stage", "./World", "./Ticker", "./State", "./Lo
          */
         function Game(_a) {
             var _this = this;
-            var artRootUrl = _a.artRootUrl, hostElement = _a.hostElement, log = _a.log;
+            var hostElement = _a.hostElement, log = _a.log;
             this.log = log;
             // Create the Babylon stage.
             this.stage = new Stage_1.default({ hostElement: hostElement });
@@ -24,15 +24,12 @@ define(["require", "exports", "./Stage", "./World", "./Ticker", "./State", "./Lo
             this.world = new World_1.default({
                 game: this,
                 stage: this.stage,
-                loader: new Loader_1.default({
-                    scene: this.stage.scene,
-                    rootUrl: artRootUrl
-                })
+                loader: new Loader_1.default({ scene: this.stage.scene })
             });
             // Create game logic ticker, and define the game logic routine.
             this.logicTicker = new Ticker_1.default({
-                tick: function (tickInfo) {
-                    _this.world.logic({ tickInfo: tickInfo, gameState: _this.state });
+                tick: function (tickReport) {
+                    _this.world.logic({ tickReport: tickReport, gameState: _this.state });
                 }
             });
             // Initialize this game.

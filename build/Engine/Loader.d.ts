@@ -3,7 +3,6 @@
  */
 export default class Loader {
     protected scene: BABYLON.Scene;
-    protected rootUrl: string;
     constructor(options: ObjectLoaderOptions);
     /**
      * Load a ".obj" file, relative to this loader's root url.
@@ -30,6 +29,4 @@ export interface LoadedObjectReport {
 export interface ObjectLoaderOptions {
     /** Current babylon scene to load things into. */
     scene: BABYLON.Scene;
-    /** Load object files relative to this root directory URL. */
-    rootUrl: string;
 }

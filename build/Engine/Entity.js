@@ -32,11 +32,11 @@ define(["require", "exports", "./State"], function (require, exports, State_1) {
         Entity.prototype.logic = function (input) { return undefined; };
         /**
          * Handle being removed from the game.
-         * Tear down any event subscriptions.
+         * Tear down any event subscriptions, etc.
          */
         Entity.prototype.removal = function () { };
         /**
-         * Entity's aesthetic appearance in debugging logs.
+         * Make it look pretty in the console logs.
          */
         Entity.prototype.toString = function () { return "<" + this.id + (this.label ? '-' : '') + this.label + ">"; };
         /** Module ID for this entity class. Used to load entity classes on-the-fly. */

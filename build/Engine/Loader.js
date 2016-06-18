@@ -6,7 +6,6 @@ define(["require", "exports"], function (require, exports) {
     var Loader = (function () {
         function Loader(options) {
             this.scene = options.scene;
-            this.rootUrl = options.rootUrl;
         }
         /**
          * Load a ".obj" file, relative to this loader's root url.
@@ -16,15 +15,33 @@ define(["require", "exports"], function (require, exports) {
             var _this = this;
             var path = _a.path;
             return new Promise(function (resolve, reject) {
+                // Work a little magic to distinguish the directory path from the filename, which Babylon wants.
+                var _a = (function () {
+                    var dir = '';
+                    var objFileName = '';
+                    if (path.includes('/')) {
+                        var parts = path.split('/');
+                        objFileName = parts.pop();
+                        dir = parts.join('/') + '/';
+                    }
+                    else {
+                        objFileName = path;
+                    }
+                    return { dir: dir, objFileName: objFileName };
+                })(), dir = _a.dir, objFileName = _a.objFileName;
+                // Create a Babylon assets manager.
                 var assetsManager = new BABYLON.AssetsManager(_this.scene);
                 assetsManager.useDefaultLoadingScreen = false;
-                var meshTask = assetsManager.addMeshTask(performance.now().toString(), null, _this.rootUrl, path);
+                // Create a mesh task to load.
+                var meshName = performance.now().toString(); // like totally w/e
+                var meshTask = assetsManager.addMeshTask(meshName, null, dir, objFileName);
                 meshTask.onSuccess = function (task) {
                     resolve({
                         meshes: task.loadedMeshes
                     });
                 };
                 meshTask.onError = reject;
+                // Start loading.
                 assetsManager.load();
             });
         };

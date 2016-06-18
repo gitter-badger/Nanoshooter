@@ -17,6 +17,7 @@ define(["require", "exports"], function (require, exports) {
             this.game = options.game;
             this.stage = options.stage;
             this.loader = options.loader;
+            this.log = options.log || this.game.log;
         }
         /**
          * Query entities by label with a regular expression.
@@ -49,13 +50,13 @@ define(["require", "exports"], function (require, exports) {
          */
         World.prototype.logic = function (_a) {
             var _this = this;
-            var gameState = _a.gameState, tickInfo = _a.tickInfo;
+            var gameState = _a.gameState, tickReport = _a.tickReport;
             var added = [];
             var removed = [];
             // Add entities that are present in the game state, but are missing from this world.
             gameState.loopOverEntities(function (entityState, id) {
                 if (!_this.entities.hasOwnProperty(id))
-                    added.push(_this.conjureEntity(id, entityState).then(function () { return undefined; }));
+                    added.push(_this.summonEntity(id, entityState).then(function () { return undefined; }));
             });
             // Remove entities that are missing from the game state, but are present in this game world.
             gameState.loopOverEntities(function (entityState, id) {
@@ -66,19 +67,20 @@ define(["require", "exports"], function (require, exports) {
             this.loopOverEntities(function (entity) {
                 entity.logic({
                     entityState: gameState.getEntityState(entity.id),
-                    tickInfo: tickInfo
+                    tickReport: tickReport
                 });
             });
             // Return a report of all added or removed entities.
-            return Promise.all([Promise.all(added), Promise.all(removed)]).then(function (results) { return ({
+            return Promise.all([Promise.all(added), Promise.all(removed)])
+                .then(function (results) { return ({
                 added: results[0],
                 removed: results[1]
             }); });
         };
         /**
-         * Dynamically load up, and instance an entity provided entity state.
+         * Dynamically load up and instantiate an entity provided entity state.
          */
-        World.prototype.conjureEntity = function (id, state) {
+        World.prototype.summonEntity = function (id, state) {
             var _this = this;
             return new Promise(function (resolve, reject) {
                 // Entity is set to null in the collection while the entity is loading.
@@ -86,18 +88,18 @@ define(["require", "exports"], function (require, exports) {
                 _this.entities[id] = null;
                 // Load the entity.
                 require([state.type], function (entityModule) {
-                    // Instance the entity.
+                    // Instantiate the entity.
                     var entity = new entityModule.default({
+                        id: id,
+                        label: state.label,
                         game: _this.game,
                         stage: _this.stage,
-                        loader: _this.loader,
-                        id: id,
-                        label: state.label
+                        loader: _this.loader
                     });
                     // Add the entity to the entities collection.
                     _this.entities[id] = entity;
                     // Log about it.
-                    _this.game.log("(+) Added entity " + entity);
+                    _this.log("(+) Added entity " + entity);
                     // Resolve the promise with the added entity.
                     resolve(entity);
                 }, 
@@ -112,7 +114,7 @@ define(["require", "exports"], function (require, exports) {
             var entity = this.entities[id];
             entity.removal();
             delete this.entities[id];
-            this.game.log("(-) Removed entity " + entity);
+            this.log("(-) Removed entity " + entity);
             return Promise.resolve();
         };
         return World;

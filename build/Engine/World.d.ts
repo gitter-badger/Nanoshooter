@@ -1,8 +1,8 @@
-import Game, { GameState } from "./Game";
+import Game, { GameState, Logger } from "./Game";
 import Stage from "./Stage";
 import Loader from "./Loader";
 import Entity from "./Entity";
-import { TickInfo } from "./Ticker";
+import { TickReport } from "./Ticker";
 /**
  * Inputs for a new world instance.
  */
@@ -10,6 +10,7 @@ export interface WorldOptions {
     game: Game;
     stage: Stage;
     loader: Loader;
+    log?: Logger;
 }
 /**
  * Game world, which contains entity instances which imitate the game state.
@@ -25,6 +26,8 @@ export default class World {
     protected stage: Stage;
     /** Loads object files and images. */
     protected loader: Loader;
+    /** Logger for world events. */
+    protected log: Logger;
     /** Collection of entity instances. */
     protected entities: {
         [id: string]: Entity;
@@ -48,11 +51,11 @@ export default class World {
      *  - Run all entity logic.
      *  - Return a final logic report, which includes all added or removed entities.
      */
-    logic({gameState, tickInfo}: WorldLogicInput): Promise<WorldLogicOutput>;
+    logic({gameState, tickReport}: WorldLogicInput): Promise<WorldLogicOutput>;
     /**
-     * Dynamically load up, and instance an entity provided entity state.
+     * Dynamically load up and instantiate an entity provided entity state.
      */
-    private conjureEntity(id, state);
+    private summonEntity(id, state);
     /**
      * Remove an entity from the game world.
      */
@@ -60,14 +63,11 @@ export default class World {
 }
 export interface WorldLogicInput {
     gameState: GameState;
-    tickInfo: TickInfo;
+    tickReport: TickReport;
 }
 export interface WorldLogicOutput {
     /** Entity instances which were added. */
     added: Entity[];
     /** The IDs of entity instances which were removed. */
     removed: string[];
-}
-/** Returns from a reflection. */
-export interface ReflectionReport {
 }

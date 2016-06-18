@@ -12,7 +12,7 @@ define(["require", "exports", "../Tank"], function (require, exports, Tank_1) {
         }
         TankAlpha.prototype.initialize = function () {
             var _this = this;
-            this.loadTank("tank-alpha.obj").then(function () {
+            this.loadTank("art/tanks/alpha/tank-alpha.obj").then(function () {
                 _this.chassis.position.x -= 4;
             });
         };

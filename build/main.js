@@ -9,7 +9,6 @@ define(["require", "exports", "./Nanoshooter"], function (require, exports, Nano
     var timeBeforeInitialize = (+new Date);
     // Initialize the Nanoshooter game.
     var nanoshooter = window["nanoshooter"] = new Nanoshooter_1.default({
-        artRootUrl: "./art/",
         hostElement: document.querySelector(".game"),
         log: function () {
             var messages = [];
