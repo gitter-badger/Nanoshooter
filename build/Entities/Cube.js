@@ -13,7 +13,7 @@ define(["require", "exports", "../Engine/Entity"], function (require, exports, E
         function Cube() {
             _super.apply(this, arguments);
         }
-        Cube.prototype.initialize = function () {
+        Cube.prototype.initialize = function (entityState) {
             var mesh = this.mesh = BABYLON.Mesh.CreateBox(this.id, 1.5, this.stage.scene);
             mesh["cube"] = true;
             var material = new BABYLON.StandardMaterial("floor", this.stage.scene);

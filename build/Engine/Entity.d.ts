@@ -1,7 +1,6 @@
 import Game from "./Game";
 import Stage from "./Stage";
 import Loader from "./Loader";
-import State from "./State";
 import { TickReport } from "./Ticker";
 export { TickReport };
 /**
@@ -9,6 +8,7 @@ export { TickReport };
  */
 export interface EntityOptions {
     id: string;
+    entityState: EntityState;
     game: Game;
     stage: Stage;
     loader: Loader;
@@ -39,7 +39,7 @@ export default class Entity {
     /**
      * Initialize this entity.
      */
-    protected initialize(): void;
+    protected initialize(state: EntityState): void;
     /**
      * Respond to fresh entity state on a logic tick.
      */
@@ -61,12 +61,7 @@ export interface EntityLogicInput {
 export interface EntityLogicOutput {
     entityStateDelta: any;
 }
-export declare class EntityState extends State {
-    type: string;
-    label: string;
-    constructor(options: EntityStateOptions);
-}
-export interface EntityStateOptions {
+export interface EntityState {
     type: string;
     label?: string;
 }

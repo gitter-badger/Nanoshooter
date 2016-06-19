@@ -14,7 +14,7 @@ define(["require", "exports", '../Engine/Entity'], function (require, exports, E
         function ArtViewer() {
             _super.apply(this, arguments);
         }
-        ArtViewer.prototype.initialize = function () {
+        ArtViewer.prototype.initialize = function (entityState) {
             var viewPath = location.search.substr(1);
             if (viewPath)
                 this.loadProp(viewPath);

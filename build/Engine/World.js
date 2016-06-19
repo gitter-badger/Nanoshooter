@@ -80,18 +80,19 @@ define(["require", "exports"], function (require, exports) {
         /**
          * Dynamically load up and instantiate an entity provided entity state.
          */
-        World.prototype.summonEntity = function (id, state) {
+        World.prototype.summonEntity = function (id, entityState) {
             var _this = this;
             return new Promise(function (resolve, reject) {
                 // Entity is set to null in the collection while the entity is loading.
                 // If we didn't do this, the world might perform another sync during
                 _this.entities[id] = null;
                 // Load the entity.
-                require([state.type], function (entityModule) {
+                require([entityState.type], function (entityModule) {
                     // Instantiate the entity.
                     var entity = new entityModule.default({
                         id: id,
-                        label: state.label,
+                        entityState: entityState,
+                        label: entityState.label,
                         game: _this.game,
                         stage: _this.stage,
                         loader: _this.loader

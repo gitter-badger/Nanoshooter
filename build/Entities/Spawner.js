@@ -13,16 +13,16 @@ define(["require", "exports", "../Engine/Entity"], function (require, exports, E
         function Spawner() {
             _super.apply(this, arguments);
         }
-        Spawner.prototype.initialize = function () {
+        Spawner.prototype.initialize = function (entityState) {
             var _this = this;
             window.addEventListener("keyup", this.keyupAction = function (event) {
                 //                Spacebar.
                 //                    ↓
                 if (event.keyCode === 32) {
-                    _this.game.addEntity(new Entity_1.EntityState({
+                    _this.game.addEntity({
                         type: "Nanoshooter/Entities/Cube",
                         label: "SpawnedCube"
-                    }));
+                    });
                 }
             });
         };

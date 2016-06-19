@@ -13,7 +13,7 @@ define(["require", "exports", "../Engine/Entity"], function (require, exports, E
         function Floor() {
             _super.apply(this, arguments);
         }
-        Floor.prototype.initialize = function () {
+        Floor.prototype.initialize = function (entityState) {
             var mesh = this.mesh = BABYLON.Mesh.CreateGround(this.id, 128, 128, 2, this.stage.scene);
             var material = new BABYLON.StandardMaterial("floor", this.stage.scene);
             material.specularColor = new BABYLON.Color3(0, 0, 0);

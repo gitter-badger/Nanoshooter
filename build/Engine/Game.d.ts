@@ -36,7 +36,7 @@ export default class Game {
      * Add an entity to the game based on the provided entity state.
      * TODO: Make this return a promise of the true Entity instance within the World.
      */
-    addEntity(entityState: EntityState): void;
+    addEntity<T extends EntityState>(entityState: T): void;
     /**
      * Remove an entity from the state based on the provided entity id.
      * TODO: Make this return a promise that is resolved when the entity instance is actually removed from the world.
@@ -75,7 +75,7 @@ export declare class GameState extends State {
     /**
      * Add entity state.
      */
-    addEntity(entityState: EntityState): void;
+    addEntity<T extends EntityState>(entityState: T): void;
     /**
      * Remove entity state.
      */

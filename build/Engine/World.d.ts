@@ -55,7 +55,7 @@ export default class World {
     /**
      * Dynamically load up and instantiate an entity provided entity state.
      */
-    private summonEntity(id, state);
+    private summonEntity(id, entityState);
     /**
      * Remove an entity from the game world.
      */

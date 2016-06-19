@@ -3,7 +3,7 @@ var __extends = (this && this.__extends) || function (d, b) {
     function __() { this.constructor = d; }
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
-define(["require", "exports", "./Engine/Game", "./Engine/Entity"], function (require, exports, Game_1, Entity_1) {
+define(["require", "exports", "./Engine/Game"], function (require, exports, Game_1) {
     "use strict";
     /**
      * Nanoshooter game.
@@ -35,34 +35,40 @@ define(["require", "exports", "./Engine/Game", "./Engine/Entity"], function (req
         };
         Nanoshooter.prototype.createInitialEntities = function () {
             // Floor.
-            this.addEntity(new Entity_1.EntityState({
+            this.addEntity({
                 type: "Nanoshooter/Entities/Floor",
                 label: "FancyFloor"
-            }));
+            });
             // If the page has a querystring, display an empty scene with the art viewer.
             if (location.search) {
                 // Art viewer.
-                this.addEntity(new Entity_1.EntityState({
+                this.addEntity({
                     type: "Nanoshooter/Entities/ArtViewer",
                     label: "ArtViewer"
-                }));
+                });
             }
             else {
                 // Tank alpha.
-                this.addEntity(new Entity_1.EntityState({
-                    type: "Nanoshooter/Entities/Tanks/TankAlpha",
-                    label: "TankAlpha"
-                }));
+                this.addEntity({
+                    type: "Nanoshooter/Entities/Tank",
+                    label: "TankAlpha",
+                    playerControlled: true,
+                    artPath: "art/tanks/alpha/tank-alpha.obj",
+                    position: [-4, 0, 0]
+                });
                 // Tank bravo.
-                this.addEntity(new Entity_1.EntityState({
-                    type: "Nanoshooter/Entities/Tanks/TankBravo",
-                    label: "TankBravo"
-                }));
+                this.addEntity({
+                    type: "Nanoshooter/Entities/Tank",
+                    label: "TankBravo",
+                    playerControlled: true,
+                    artPath: "art/tanks/bravo/tank-bravo.obj",
+                    position: [4, 0, 0]
+                });
                 // Spawner.
-                this.addEntity(new Entity_1.EntityState({
+                this.addEntity({
                     type: "Nanoshooter/Entities/Spawner",
                     label: "Spawnlord"
-                }));
+                });
             }
             // // Robot.
             // this.addEntity(new EntityState({
