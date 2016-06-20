@@ -21,11 +21,12 @@ define(["require", "exports", "./Engine/Game"], function (require, exports, Game
             var gravity = new BABYLON.Vector3(0, -9.81, 0);
             scene.enablePhysics(gravity, new BABYLON.CannonJSPlugin());
             // Background color.
-            scene.clearColor = new BABYLON.Color3(0.8, 0.9, 1);
+            scene.clearColor = new BABYLON.Color3(0.2, 0.2, 0.2);
             // Lights.
             var toplight = new BABYLON.DirectionalLight("sunlight", new BABYLON.Vector3(0.2, -1, 0.3), scene);
             var backlight = new BABYLON.DirectionalLight("backlight", new BABYLON.Vector3(-0.76, -0.8, -0.44), scene);
-            toplight.intensity = backlight.intensity = 0.4;
+            toplight.intensity = 0.8;
+            backlight.intensity = 0.4;
             // Camera.
             var camera = new BABYLON.UniversalCamera("camera1", new BABYLON.Vector3(-5, 15, -15), scene);
             camera.setTarget(BABYLON.Vector3.Zero());
@@ -60,7 +61,6 @@ define(["require", "exports", "./Engine/Game"], function (require, exports, Game
                 this.addEntity({
                     type: "Nanoshooter/Entities/Tank",
                     label: "TankBravo",
-                    playerControlled: true,
                     artPath: "art/tanks/bravo/tank-bravo.obj",
                     position: [4, 0, 0]
                 });

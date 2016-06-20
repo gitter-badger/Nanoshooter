@@ -1,5 +1,9 @@
-import Entity, { EntityLogicInput, EntityLogicOutput, EntityState } from '../Engine/Entity';
+import Entity, { EntityOptions, EntityLogicInput, EntityLogicOutput, EntityState } from '../Engine/Entity';
 import KeyboardWatcher from '../Engine/KeyboardWatcher';
+/** Options for creating a tank. */
+export interface TankOptions extends EntityOptions {
+    entityState: TankState;
+}
 /**
  * It's a full blown tank!
  */
@@ -19,10 +23,12 @@ export default class Tank extends Entity {
     protected playerControlled: boolean;
     /** Position the tank will start at. */
     protected startingPosition: BABYLON.Vector3;
+    /** Camera for this tank. */
+    protected camera: BABYLON.TargetCamera;
     /**
-     * Initialize the tank, by loading it.
+     * Construct a tank.
      */
-    initialize(entityState: TankState): void;
+    constructor(options: TankOptions);
     /**
      * Cleanup this tank entity.
      */
@@ -40,7 +46,13 @@ export default class Tank extends Entity {
     /**
      * Get the direction in which the player wishes to move.
      */
-    protected ascertainDesiredMovementVector(): BABYLON.Vector3;
+    protected ascertainDesiredMovementVector(): (BABYLON.Vector3);
+    protected speed: number;
+    protected speedVector: BABYLON.Vector3;
+    /**
+     * Accelerate the tank when movement keys are pressed.
+     */
+    protected accelerateWhenMoving(desiredMovement: BABYLON.Vector3): void;
     /**
      * Orient the chassis in a given direction.
      */

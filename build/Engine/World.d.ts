@@ -32,6 +32,8 @@ export default class World {
     protected entities: {
         [id: string]: Entity;
     };
+    /** Getter which provides an array version of entities. */
+    entityArray: Entity[];
     /**
      * Create a world instance with some world options.
      */

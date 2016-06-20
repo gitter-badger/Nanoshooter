@@ -19,6 +19,15 @@ define(["require", "exports"], function (require, exports) {
             this.loader = options.loader;
             this.log = options.log || this.game.log;
         }
+        Object.defineProperty(World.prototype, "entityArray", {
+            /** Getter which provides an array version of entities. */
+            get: function () {
+                var _this = this;
+                return Object.keys(this.entities).map(function (id) { return _this.entities[id]; });
+            },
+            enumerable: true,
+            configurable: true
+        });
         /**
          * Query entities by label with a regular expression.
          */

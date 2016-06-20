@@ -2,6 +2,7 @@ define(["require", "exports"], function (require, exports) {
     "use strict";
     /**
      * Govern a 3D Babylon scene from a high level.
+     * The stage is an access point to some key Babylon API components.
      */
     var Stage = (function () {
         /**
@@ -21,23 +22,17 @@ define(["require", "exports"], function (require, exports) {
                     _this.engine.resize();
                 },
                 mousemove: function () {
-                    // Update the picking information about the user's mouse cursor in the 3D scene.
+                    // Update the picking info about the user's mouse cursor in the 3D scene.
                     _this.pick = _this.scene.pick(_this.scene.pointerX, _this.scene.pointerY);
                 }
             };
             this.lastRenderTime = performance.now();
             this.hostElement = options.hostElement;
-            this.initialize();
-        }
-        /**
-         * Establish an empty Babylon scene.
-         */
-        Stage.prototype.initialize = function () {
             this.canvas = document.createElement("canvas");
             this.hostElement.appendChild(this.canvas);
             this.engine = new BABYLON.Engine(this.canvas, true);
             this.scene = new BABYLON.Scene(this.engine);
-        };
+        }
         /**
          * Start the rendering loop.
          */
