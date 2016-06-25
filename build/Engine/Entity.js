@@ -35,7 +35,7 @@ define(["require", "exports"], function (require, exports) {
          */
         Entity.prototype.toString = function () { return "<" + this.id + (this.label ? '-' : '') + this.label + ">"; };
         /** Module ID for this entity class. Used to load entity classes on-the-fly. */
-        Entity.type = "Nanoshooter/Entities/Entity";
+        Entity.type = 'Nanoshooter/Entities/Entity';
         return Entity;
     }());
     Object.defineProperty(exports, "__esModule", { value: true });

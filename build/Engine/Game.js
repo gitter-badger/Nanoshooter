@@ -3,7 +3,7 @@ var __extends = (this && this.__extends) || function (d, b) {
     function __() { this.constructor = d; }
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
-define(["require", "exports", "./Stage", "./World", "./Ticker", "./State", "./Loader"], function (require, exports, Stage_1, World_1, Ticker_1, State_1, Loader_1) {
+define(["require", "exports", './Stage', './World', './State', './Loader', './Ticker'], function (require, exports, Stage_1, World_1, State_1, Loader_1, Ticker_1) {
     "use strict";
     /**
      * 3D web game.

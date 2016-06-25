@@ -15,9 +15,13 @@ define(["require", "exports"], function (require, exports) {
          */
         State.diff = function (alpha, beta) { throw "Coming soon"; };
         /** Apply a delta onto this state. */
-        State.prototype.applyDelta = function (delta) { return State.applyDelta(this, delta); };
+        State.prototype.applyDelta = function (delta) {
+            return State.applyDelta(this, delta);
+        };
         /** Generate a diff from this state to a provided one. */
-        State.prototype.diff = function (beta) { return State.diff(this, beta); };
+        State.prototype.diff = function (beta) {
+            return State.diff(this, beta);
+        };
         return State;
     }());
     Object.defineProperty(exports, "__esModule", { value: true });

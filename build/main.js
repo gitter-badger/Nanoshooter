@@ -1,6 +1,6 @@
 ///<reference path="../deps/babylon/babylon.d.ts"/>
 ///<reference path="../typings/browser.d.ts"/>
-define(["require", "exports", "./Nanoshooter"], function (require, exports, Nanoshooter_1) {
+define(["require", "exports", './Nanoshooter'], function (require, exports, Nanoshooter_1) {
     "use strict";
     // This main script is the entry point for the web browser.
     //   - Instantiate and start the Nanoshooter game.
@@ -8,8 +8,8 @@ define(["require", "exports", "./Nanoshooter"], function (require, exports, Nano
     //   - Start running the game.
     var timeBeforeInitialize = (+new Date);
     // Initialize the Nanoshooter game.
-    var nanoshooter = window["nanoshooter"] = new Nanoshooter_1.default({
-        hostElement: document.querySelector(".game"),
+    var nanoshooter = window['nanoshooter'] = new Nanoshooter_1.default({
+        hostElement: document.querySelector('.game'),
         log: function () {
             var messages = [];
             for (var _i = 0; _i < arguments.length; _i++) {
@@ -18,12 +18,11 @@ define(["require", "exports", "./Nanoshooter"], function (require, exports, Nano
             return console.log.apply(console, messages);
         }
     });
-    {
-        var fps_1 = document.querySelector(".fps");
-        setInterval(function () {
-            fps_1.textContent = nanoshooter.getFramerate().toFixed(0);
-        }, 100);
-    }
+    // Establish a framerate display.
+    var fpsElement = document.querySelector('.fps');
+    setInterval(function () {
+        fpsElement.textContent = nanoshooter.getFramerate().toFixed(0);
+    }, 100);
     // Start running the game engine.
     nanoshooter.start();
     // Log the profiling results.

@@ -35,10 +35,16 @@ export default class Stage {
      */
     private render({since});
 }
+/**
+ * Options for creating a new stage.
+ */
 export interface StageOptions {
     /** HTML element to inject the canvas within. */
     hostElement: HTMLElement;
 }
+/**
+ * Information passed for each rendered frame.
+ */
 export interface RenderInfo {
     /** Time since the last frame finished rendering. */
     since: number;

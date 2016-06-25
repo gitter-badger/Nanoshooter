@@ -1,8 +1,8 @@
-import Stage from "./Stage";
-import World from "./World";
-import Ticker from "./Ticker";
-import { EntityState } from "./Entity";
-import State from "./State";
+import Stage from './Stage';
+import World from './World';
+import State from './State';
+import Ticker from './Ticker';
+import { EntityState } from './Entity';
 /**
  * Options for creating a Game.
  */

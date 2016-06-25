@@ -1,7 +1,7 @@
-import Game from "./Game";
-import Stage from "./Stage";
-import Loader from "./Loader";
-import { TickReport } from "./Ticker";
+import Game from './Game';
+import Stage from './Stage';
+import Loader from './Loader';
+import { TickReport } from './Ticker';
 export { TickReport };
 /**
  * Options for creating an Entity instance.
