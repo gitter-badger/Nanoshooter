@@ -35,6 +35,11 @@ define(["require", "exports", './Stage', './World', './State', './Loader', './Ti
             // Initialize this game.
             this.initialize();
         }
+        /**
+         * Tear down and de-initialize all of the game's components.
+         * This allows all entities to destruct, thus removing their event bindings which might otherwise cause errors if not removed.
+         */
+        Game.prototype.destructor = function () { };
         /** Overridable game initialization step. */
         Game.prototype.initialize = function () { };
         /**

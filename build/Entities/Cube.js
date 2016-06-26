@@ -23,7 +23,10 @@ define(["require", "exports", "../Engine/Entity"], function (require, exports, E
             mesh.position.y = 21.13;
             mesh.physicsImpostor = new BABYLON.PhysicsImpostor(mesh, BABYLON.PhysicsImpostor.BoxImpostor, { mass: 0.2, restitution: 0.1 }, this.stage.scene);
         };
-        Cube.prototype.removal = function () {
+        /**
+         * Cleanup for removal from the game.
+         */
+        Cube.prototype.destructor = function () {
             this.mesh.dispose();
         };
         Cube.type = "Nanoshooter/Entities/Cube";

@@ -33,6 +33,7 @@ define(["require", "exports"], function (require, exports) {
             this.hostElement.appendChild(this.canvas);
             this.engine = new BABYLON.Engine(this.canvas, true);
             this.scene = new BABYLON.Scene(this.engine);
+            BABYLON.OBJFileLoader.OPTIMIZE_WITH_UV = true;
         }
         /**
          * Start the rendering loop.

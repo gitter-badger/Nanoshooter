@@ -3,7 +3,7 @@ var __extends = (this && this.__extends) || function (d, b) {
     function __() { this.constructor = d; }
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
-define(["require", "exports", '../Engine/Entity', '../Engine/KeyboardWatcher'], function (require, exports, Entity_1, KeyboardWatcher_1) {
+define(["require", "exports", '../Engine/Entity', '../Toolbox/KeyboardWatcher'], function (require, exports, Entity_1, KeyboardWatcher_1) {
     "use strict";
     /**
      * It's a full blown tank!
@@ -24,14 +24,14 @@ define(["require", "exports", '../Engine/Entity', '../Engine/KeyboardWatcher'], 
             this.lastDesiredMovementVector = new BABYLON.Vector3(0, 0, -1);
             this.speed = 5;
             this.speedVector = new BABYLON.Vector3(this.speed, this.speed, this.speed);
-            var entityState = options.entityState;
+            var tankState = options.entityState;
             // Starting position.
-            if (entityState.position) {
-                var p = entityState.position;
+            if (tankState.position) {
+                var p = tankState.position;
                 this.startingPosition = new BABYLON.Vector3(p[0], p[1], p[2]);
             }
             // Determine player controlled state.
-            this.playerControlled = !!entityState.playerControlled;
+            this.playerControlled = !!tankState.playerControlled;
             // If this tank is player controlled, establish a keyboard watcher.
             if (this.playerControlled) {
                 this.keyboardWatcher = new KeyboardWatcher_1.default({
@@ -44,7 +44,7 @@ define(["require", "exports", '../Engine/Entity', '../Engine/KeyboardWatcher'], 
                 });
             }
             // Load the tank obj from the art path specified in entity state, or use the default.
-            this.loadTank(entityState.artPath || this.artPath)
+            this.loadTank(tankState.artPath || this.artPath)
                 .then(function () {
                 // Create the tank's camera – all tanks have a camera, it just might not be active.
                 _this.camera = new BABYLON.TargetCamera("tank-camera-" + _this.id, BABYLON.Vector3.Zero(), _this.stage.scene);
@@ -58,27 +58,18 @@ define(["require", "exports", '../Engine/Entity', '../Engine/KeyboardWatcher'], 
             });
         }
         /**
-         * Cleanup this tank entity.
-         */
-        Tank.prototype.removal = function () {
-            // Remove all meshes from the scene.
-            for (var _i = 0, _a = this.meshes; _i < _a.length; _i++) {
-                var mesh = _a[_i];
-                this.stage.scene.removeMesh(mesh);
-            }
-            // Cleanup the keyboard watcher.
-            this.keyboardWatcher.unbind();
-        };
-        /**
-         * Load tank art into the scene.
+         * Load tank art (.obj file) into the scene.
          */
         Tank.prototype.loadTank = function (path) {
             var _this = this;
             return this.loader.loadObject({ path: path }).then(function (loaded) {
                 _this.meshes = loaded.meshes;
+                // Find the right meshes.
                 _this.chassis = _this.meshes.find(function (mesh) { return /Chassis/i.test(mesh.name); });
                 _this.turret = _this.meshes.find(function (mesh) { return /Turret/i.test(mesh.name); });
+                // Attach the turret to the chassis.
                 _this.turret.parent = _this.chassis;
+                // Assume the starting position.
                 if (_this.startingPosition)
                     _this.chassis.setAbsolutePosition(_this.startingPosition.add(new BABYLON.Vector3(0, 10, 0)));
                 // Apply physics.
@@ -152,6 +143,18 @@ define(["require", "exports", '../Engine/Entity', '../Engine/KeyboardWatcher'], 
             this.chassis.getWorldMatrix().invertToRef(matrix);
             var localPoint = BABYLON.Vector3.TransformCoordinates(aimPoint, matrix);
             this.turret.lookAt(localPoint, 0, 0, 0);
+        };
+        /**
+         * Cleanup for removal from the game.
+         */
+        Tank.prototype.destructor = function () {
+            // Remove all meshes from the scene.
+            for (var _i = 0, _a = this.meshes; _i < _a.length; _i++) {
+                var mesh = _a[_i];
+                this.stage.scene.removeMesh(mesh);
+            }
+            // Cleanup the keyboard watcher.
+            this.keyboardWatcher.unbind();
         };
         Tank.type = 'Nanoshooter/Entities/Tank';
         return Tank;

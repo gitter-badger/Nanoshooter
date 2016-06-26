@@ -8,5 +8,8 @@ export default class ArtViewer extends Entity {
     protected meshes: BABYLON.Mesh[];
     protected initialize(entityState: EntityState): void;
     protected loadProp(path: string): Promise<void>;
-    removal(): void;
+    /**
+     * Cleanup for removal from the game.
+     */
+    destructor(): void;
 }

@@ -6,7 +6,7 @@ var __extends = (this && this.__extends) || function (d, b) {
 define(["require", "exports", "../Engine/Entity"], function (require, exports, Entity_1) {
     "use strict";
     /**
-     * Spawns stuff.
+     * Just spawns cubes when spacebar is pressed.
      */
     var Spawner = (function (_super) {
         __extends(Spawner, _super);
@@ -26,7 +26,10 @@ define(["require", "exports", "../Engine/Entity"], function (require, exports, E
                 }
             });
         };
-        Spawner.prototype.removal = function () {
+        /**
+         * Cleanup for removal from the game.
+         */
+        Spawner.prototype.destructor = function () {
             window.removeEventListener("keyup", this.keyupAction);
         };
         Spawner.type = "Nanoshooter/Entities/Spawner";

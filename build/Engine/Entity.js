@@ -22,14 +22,14 @@ define(["require", "exports"], function (require, exports) {
          */
         Entity.prototype.initialize = function (state) { };
         /**
+         * Clean up this entity for removal from the game.
+         * Tear down any event subscriptions, etc.
+         */
+        Entity.prototype.destructor = function () { };
+        /**
          * Respond to fresh entity state on a logic tick.
          */
         Entity.prototype.logic = function (input) { return undefined; };
-        /**
-         * Handle being removed from the game.
-         * Tear down any event subscriptions, etc.
-         */
-        Entity.prototype.removal = function () { };
         /**
          * Make it look pretty in the console logs.
          */

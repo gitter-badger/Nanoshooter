@@ -30,6 +30,11 @@ export default class Game {
      * Create and wire up the engine components that the game is comprised of.
      */
     constructor({hostElement, log}: GameOptions);
+    /**
+     * Tear down and de-initialize all of the game's components.
+     * This allows all entities to destruct, thus removing their event bindings which might otherwise cause errors if not removed.
+     */
+    destructor(): void;
     /** Overridable game initialization step. */
     protected initialize(): void;
     /**

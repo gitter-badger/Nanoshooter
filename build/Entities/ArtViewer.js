@@ -31,8 +31,10 @@ define(["require", "exports", '../Engine/Entity'], function (require, exports, E
                     console.error(error);
             });
         };
-        ArtViewer.prototype.removal = function () {
-            // Remove all meshes from the scene.
+        /**
+         * Cleanup for removal from the game.
+         */
+        ArtViewer.prototype.destructor = function () {
             for (var _i = 0, _a = this.meshes; _i < _a.length; _i++) {
                 var mesh = _a[_i];
                 this.stage.scene.removeMesh(mesh);

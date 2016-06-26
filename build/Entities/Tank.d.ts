@@ -1,5 +1,5 @@
 import Entity, { EntityOptions, EntityLogicInput, EntityLogicOutput, EntityState } from '../Engine/Entity';
-import KeyboardWatcher from '../Engine/KeyboardWatcher';
+import KeyboardWatcher from '../Toolbox/KeyboardWatcher';
 /** Options for creating a tank. */
 export interface TankOptions extends EntityOptions {
     entityState: TankState;
@@ -30,11 +30,7 @@ export default class Tank extends Entity {
      */
     constructor(options: TankOptions);
     /**
-     * Cleanup this tank entity.
-     */
-    removal(): void;
-    /**
-     * Load tank art into the scene.
+     * Load tank art (.obj file) into the scene.
      */
     loadTank(path: string): Promise<void>;
     /**
@@ -61,6 +57,10 @@ export default class Tank extends Entity {
      * Aim the turret toward any point in the 3D world.
      */
     protected aimTurret(pick: BABYLON.Vector3): void;
+    /**
+     * Cleanup for removal from the game.
+     */
+    destructor(): void;
 }
 /**
  * State data for a Tank!

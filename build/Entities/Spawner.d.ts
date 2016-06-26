@@ -1,10 +1,13 @@
 import Entity, { EntityState } from "../Engine/Entity";
 /**
- * Spawns stuff.
+ * Just spawns cubes when spacebar is pressed.
  */
 export default class Spawner extends Entity {
     static type: string;
     private keyupAction;
     protected initialize(entityState: EntityState): void;
-    removal(): void;
+    /**
+     * Cleanup for removal from the game.
+     */
+    destructor(): void;
 }

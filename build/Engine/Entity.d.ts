@@ -1,4 +1,5 @@
 import Game from './Game';
+import World from './World';
 import Stage from './Stage';
 import Loader from './Loader';
 import { TickReport } from './Ticker';
@@ -9,6 +10,7 @@ export { TickReport };
 export interface EntityOptions {
     id: string;
     entityState: EntityState;
+    world: World;
     game: Game;
     stage: Stage;
     loader: Loader;
@@ -23,8 +25,10 @@ export default class Entity {
     static type: string;
     /** Unique ID tag. */
     id: string;
-    /** Human-friendly nickname for this entity instance. Doesn't have to be unique. Useful for entity queries. */
+    /** Human-friendly nickname for this entity instance. Doesn't have to be unique. Useful for entity queries. Think of these like CSS class names. */
     label: string;
+    /** World instance. Entities can query for and access other entity instances. */
+    protected world: World;
     /** Parent game instance. Entities have the right to manipulate the game on a high level (start/stop, etc). */
     protected game: Game;
     /** Stage instance. Entities have full access to the Babylon API that the stage exposes. */
@@ -41,14 +45,14 @@ export default class Entity {
      */
     protected initialize(state: EntityState): void;
     /**
+     * Clean up this entity for removal from the game.
+     * Tear down any event subscriptions, etc.
+     */
+    destructor(): void;
+    /**
      * Respond to fresh entity state on a logic tick.
      */
     logic(input: EntityLogicInput): EntityLogicOutput;
-    /**
-     * Handle being removed from the game.
-     * Tear down any event subscriptions, etc.
-     */
-    removal(): void;
     /**
      * Make it look pretty in the console logs.
      */

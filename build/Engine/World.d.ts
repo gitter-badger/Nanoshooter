@@ -39,9 +39,14 @@ export default class World {
      */
     constructor(options: WorldOptions);
     /**
+     * Destruct all entities and shut down.
+     * This allows all event bindings and such to be cleaned up.
+     */
+    destructor(): void;
+    /**
      * Query entities by label with a regular expression.
      */
-    query(regularExpression: RegExp): Entity[];
+    queryEntities(regularExpression: RegExp): Entity[];
     /**
      * Loop over each entity.
      */

@@ -22,7 +22,10 @@ define(["require", "exports", "../Engine/Entity"], function (require, exports, E
             mesh.material = material;
             mesh.physicsImpostor = new BABYLON.PhysicsImpostor(mesh, BABYLON.PhysicsImpostor.BoxImpostor, { mass: 0, restitution: 0.1 }, this.stage.scene);
         };
-        Floor.prototype.removal = function () {
+        /**
+         * Cleanup for removal from the game.
+         */
+        Floor.prototype.destructor = function () {
             this.mesh.dispose();
         };
         Floor.type = "Nanoshooter/Entities/Floor";

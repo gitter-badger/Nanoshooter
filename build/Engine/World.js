@@ -29,9 +29,14 @@ define(["require", "exports"], function (require, exports) {
             configurable: true
         });
         /**
+         * Destruct all entities and shut down.
+         * This allows all event bindings and such to be cleaned up.
+         */
+        World.prototype.destructor = function () { };
+        /**
          * Query entities by label with a regular expression.
          */
-        World.prototype.query = function (regularExpression) {
+        World.prototype.queryEntities = function (regularExpression) {
             var matches = [];
             this.loopOverEntities(function (entity) {
                 if (regularExpression.test(entity.label))
@@ -102,6 +107,7 @@ define(["require", "exports"], function (require, exports) {
                         id: id,
                         entityState: entityState,
                         label: entityState.label,
+                        world: _this,
                         game: _this.game,
                         stage: _this.stage,
                         loader: _this.loader
@@ -122,7 +128,7 @@ define(["require", "exports"], function (require, exports) {
          */
         World.prototype.removeEntity = function (id) {
             var entity = this.entities[id];
-            entity.removal();
+            entity.destructor();
             delete this.entities[id];
             this.log("(-) Removed entity " + entity);
             return Promise.resolve();
