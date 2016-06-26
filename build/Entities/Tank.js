@@ -3,7 +3,7 @@ var __extends = (this && this.__extends) || function (d, b) {
     function __() { this.constructor = d; }
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
-define(["require", "exports", '../Engine/Entity', '../Toolbox/KeyboardWatcher'], function (require, exports, Entity_1, KeyboardWatcher_1) {
+define(["require", "exports", '../Framework/Entity', '../Toolbox/KeyboardWatcher'], function (require, exports, Entity_1, KeyboardWatcher_1) {
     "use strict";
     /**
      * It's a full blown tank!

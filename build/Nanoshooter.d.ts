@@ -1,4 +1,4 @@
-import Game from "./Engine/Game";
+import Game from "./Framework/Game";
 /**
  * Nanoshooter game.
  * Subclass of Game, which has start/stop methods, etc.

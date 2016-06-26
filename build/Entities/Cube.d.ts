@@ -1,4 +1,4 @@
-import Entity, { EntityState } from "../Engine/Entity";
+import Entity, { EntityState } from "../Framework/Entity";
 /**
  * A simple cube object in the game world.
  */

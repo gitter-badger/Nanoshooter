@@ -1,4 +1,4 @@
-import Entity, { EntityOptions, EntityLogicInput, EntityLogicOutput, EntityState } from '../Engine/Entity';
+import Entity, { EntityOptions, EntityLogicInput, EntityLogicOutput, EntityState } from '../Framework/Entity';
 import KeyboardWatcher from '../Toolbox/KeyboardWatcher';
 /** Options for creating a tank. */
 export interface TankOptions extends EntityOptions {

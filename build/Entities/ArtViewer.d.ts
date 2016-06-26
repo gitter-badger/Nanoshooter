@@ -1,4 +1,4 @@
-import Entity, { EntityState } from '../Engine/Entity';
+import Entity, { EntityState } from '../Framework/Entity';
 /**
  * Preview by providing the art path as a query string.
  * Loads an ".obj" file into the scene upon initialization.

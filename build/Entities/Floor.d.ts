@@ -1,4 +1,4 @@
-import Entity, { EntityState } from "../Engine/Entity";
+import Entity, { EntityState } from "../Framework/Entity";
 /**
  * A floor object for the game world.
  */
